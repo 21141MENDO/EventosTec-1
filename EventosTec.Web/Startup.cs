@@ -1,4 +1,4 @@
-﻿using EventosTec.Web.Models.Entities;
+﻿using EventosTec.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

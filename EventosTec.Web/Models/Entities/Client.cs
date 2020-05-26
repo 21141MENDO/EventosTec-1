@@ -1,9 +1,11 @@
-﻿using EventosTec.Web.Models.Entities;
+﻿using EventosTec.Web.Models;
+using EventosTec.Web.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace EventosTec.Web.Models.Entities
 {

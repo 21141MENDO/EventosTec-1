@@ -1,4 +1,5 @@
-﻿using EventosTec.Web.Models.Entities;
+﻿using EventosTec.Web.Models;
+using EventosTec.Web.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace EventosTec.Web.Models
 
         }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }
