@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventosTec.Web.Models;
 using EventosTec.Web.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EventosTec.Web.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly DataDbContext _context;
@@ -22,7 +24,7 @@ namespace EventosTec.Web.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            return View(await _context.Categories.Include(e => e.Events).ToListAsync());
         }
 
         // GET: Categories/Details/5
