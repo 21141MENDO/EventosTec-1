@@ -24,7 +24,8 @@ namespace EventosTec.Web.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            var dataDbContext = _context.Events.Include(a => a.City);
+
+            var dataDbContext = _context.Events.Include(a => @a.City);
             return View(await dataDbContext.ToListAsync());
         }
 
@@ -50,16 +51,29 @@ namespace EventosTec.Web.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
+            var username = User.Identity.Name;
+            var userid = _context.Clients.Where(a => a.User.Email == username).FirstOrDefault();
+            ViewBag.ClientId = userid.Id;
             ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
+
+        public IActionResult CreateEvent()
+        {
+            ViewBag.ClientId = _context.Clients.Include(u => u.User).ToList();
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            return View();
+        }
+
 
         // POST: Events/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,EventDate,Description,Picture,People,Duration,CityId")] Event @event)
+        public async Task<IActionResult> Create(Event @event)
         {
             if (ModelState.IsValid)
             {
